@@ -1,0 +1,22 @@
+generator client {
+  provider = "cargo prisma"
+  output   = "../app/src/prisma/generated.rs"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model MyEnumModel {
+  id        Int      @id @default(autoincrement())
+  my_enums  MyEnum[]
+
+  @@unique([id, my_enums])
+}
+
+enum MyEnum {
+  A
+  B
+  C
+}
